@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    mapper-locations: classpath:/mapper/**/*.xml
+    jdbc-url: jdbc:mysql://localhost:3306/community?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    driver: com.mysql.cj.jdbc.Driver
+    username: community
+    password: 1234
+    
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        
+logging.lever:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
