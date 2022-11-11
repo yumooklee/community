@@ -1,1 +1,1 @@
-# community
+# JPA로 커뮤니티 사이트 개발
