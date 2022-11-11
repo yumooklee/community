@@ -29,9 +29,9 @@ public class BoardService {
 	}
 	
 	//게시글 전체 조회
-//	public List<Board> findBoards(){
-//		return boardRepository.findAll();
-//	}
+	public List<Board> findBoards(){
+		return boardRepository.findAll();
+	}
 	
 	@Transactional(readOnly = true)
 	public Board findOne(Long boardId) {
