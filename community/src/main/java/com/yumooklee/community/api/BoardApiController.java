@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yumooklee.community.domain.Board;
+import com.yumooklee.community.domain.BoardContent;
 import com.yumooklee.community.domain.Category;
 import com.yumooklee.community.domain.Member;
+import com.yumooklee.community.service.BoardContentService;
 import com.yumooklee.community.service.BoardService;
 import com.yumooklee.community.service.CategoryService;
 import com.yumooklee.community.service.MemberService;
@@ -30,6 +32,7 @@ public class BoardApiController {
 	private final BoardService boardService;
 	private final CategoryService categoryService;
 	private final MemberService memberService;
+	private final BoardContentService boardContentService;
 	
 	@GetMapping("/api/searchBoard")
 	public Result searchBoard() {
@@ -70,6 +73,17 @@ public class BoardApiController {
 		
 		Long id = boardService.join(board);
 		
+		for (int i = 0; i < request.boardContentList.size(); i++) {
+			BoardContent requestBoardContent = request.boardContentList.get(i);
+			
+			BoardContent boardContent = new BoardContent();
+			boardContent.setBoard(board);
+			boardContent.setContent(requestBoardContent.getContent());
+			boardContent.setContentSeq(requestBoardContent.getContentSeq());
+			
+			boardContentService.join(boardContent);
+		}
+		
 		return new RegistBoardResponse(id);
 	}
 	
@@ -86,6 +100,7 @@ public class BoardApiController {
 		private Long categoryId;
 		private Long memberId;
 		private String title;
+		private List<BoardContent> boardContentList;
 	}
 	
 	@Data
