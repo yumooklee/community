@@ -40,24 +40,25 @@ public class BoardApiController {
 	
 		//엔티티 -> DTO 변환
 		List<BoardDto> collect = findBoards.stream()
-				.map(m -> new BoardDto(m.getId(), m.getCategory(), m.getMember(), m.getTitle()))
+				.map(m -> new BoardDto(m.getId(), m.getCategory().getId(), m.getMember().getId(), m.getTitle()))
 				.collect(Collectors.toList());
-	
-		return new Result(collect);
+		
+		return new Result("SUCCESS", collect);
 	}
 	
 	@Data
 	@AllArgsConstructor
 	static class Result<T> {
-		private T data;
+		String result;
+		private T board;
 	}
 	
 	@Data
 	@AllArgsConstructor
 	static class BoardDto {
-		private Long id;
-		private Category category;
-		private Member member;
+		private Long boardId;
+		private Long categoryId;
+		private Long memberId;
 		private String title;
 	}
 	
