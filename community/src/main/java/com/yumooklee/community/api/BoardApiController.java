@@ -38,7 +38,7 @@ public class BoardApiController {
 	public Result searchBoard() {
 		List<Board> findBoards = boardService.findBoards();
 	
-		//엔티티 -> DTO 변환
+		//엔티티 -> DTO 변환@@@
 		List<BoardDto> collect = findBoards.stream()
 				.map(m -> new BoardDto(m.getId(), m.getCategory().getId(), m.getMember().getId(), m.getTitle()))
 				.collect(Collectors.toList());
